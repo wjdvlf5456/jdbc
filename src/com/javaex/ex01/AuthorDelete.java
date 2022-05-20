@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AuthorInsert {
+public class AuthorDelete {
 
 	public static void main(String[] args) {
 		// 0. import java.sql.*;
@@ -23,21 +23,18 @@ public class AuthorInsert {
 			///// 3. SQL문 준비 / 바인딩 / 실행 /////
 			// SQL문 준비
 			String query = "";
-			query += " insert into author ";
-			query += " set author_name = ?, ";
-			query += "     author_desc = ? ";
+			query += " delete from author ";
 			query += " where author_id = ? ";
-			System.out.println(query);
 
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(3, 1);
+			pstmt.setInt(1, 5);
 
 			// 실행
 			int count = pstmt.executeUpdate();
 
 			///// 4.결과처리 /////
-			System.out.println(count + "건 수정 되었습니다");
+			System.out.println(count + "건이 삭제 되었습니다");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("error: 드라이버 로딩 실패 - " + e);

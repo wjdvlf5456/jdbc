@@ -3,50 +3,66 @@ package com.javaex.ex01;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AuthorUpdate {
+
 	public static void main(String[] args) {
-		String url = "jdbc:oracle:thin:@webdb_high?TNS_ADMIN=/Users/choijungphil/jungphil/Wallet_webdb";
-		String userid = "admin";
-		String pwd = "^^65Rhcemdtla";
-		
+		// 0. import java.sql.*;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
-
-		// 드라이버 로딩
+		// ResultSet rs = null;
 		try {
-			// oracle DB연결 드라이버 로딩
-			Class.forName("oracle.jdbc.OracleDriver");//
-			System.out.println("드라이버 로딩 성공");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			///// 1. JDBC 드라이버 (Oracle) 로딩 /////
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		// DBMS와 연결
-		try {
-			System.out.println("데이터베이스 연결 준비......");
-			Connection conn = DriverManager.getConnection(url, userid, pwd);
-			//SQL문 준비
+			///// 2. Connection 얻어오기 /////
+			String url = "jdbc:oracle:thin:@webdb_high?TNS_ADMIN=/Users/choijungphil/jungphil/Wallet_webdb";
+			conn = DriverManager.getConnection(url, "admin", "^^65Rhcemdtla");
+
+			///// 3. SQL문 준비 / 바인딩 / 실행 /////
+			// SQL문 준비
 			String query = "";
-			query += "update author";
-			query += "set	author_name = ?, ";
-			query += "		author_desc = ?";
-			query += "where author_id = ?";
-			
-			
-			//바인딩
+			query += " update author ";
+			query += " set author_name = ?, ";
+			query += "     author_desc = ? ";
+			query += " where author_id = ? ";
+			System.out.println(query);
+
+			// 바인딩
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "최문열");
 			pstmt.setString(2, "서울특별시");
 			pstmt.setInt(3, 1);
-			
-			//실행
+
+			// 실행
 			int count = pstmt.executeUpdate();
-			
-			//결과처리
-			System.out.println(count+"건 수정 되었습니다.");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+
+			///// 4.결과처리 /////
+			System.out.println(count + "건 수정 되었습니다");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("error: 드라이버 로딩 실패 - " + e);
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			///// 5. 자원정리 /////
+			try {
+				/*
+				if (rs != null) {
+				rs.close();
+				} 
+				*/
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
 		}
 	}
+
 }
