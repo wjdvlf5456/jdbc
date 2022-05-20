@@ -20,35 +20,36 @@ public class AuthorInsert {
 			String url = "jdbc:oracle:thin:@webdb_high?TNS_ADMIN=/Users/choijungphil/jungphil/Wallet_webdb";
 			conn = DriverManager.getConnection(url, "admin", "^^65Rhcemdtla");
 
-			///// 3. SQL문 준비 / 바인딩 / 실행 /////
+			// 3. SQL문 준비 / 바인딩 / 실행
+
 			// SQL문 준비
 			String query = "";
 			query += " insert into author ";
-			query += " set author_name = ?, ";
-			query += "     author_desc = ? ";
-			query += " where author_id = ? ";
+			query += " values(seq_author_id.nextval, ?, ?) ";
 			System.out.println(query);
 
 			// 바인딩
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(3, 1);
+			pstmt = conn.prepareStatement(query);  // 문자열 쿼리로 만들기
+			pstmt.setString(1, "김영하");          // ?(물음표) 중 1번째 -->순서중요
+			pstmt.setString(2, "알쓸신잡");       // ?(물음표) 중 2번째 -->순서중요
 
 			// 실행
-			int count = pstmt.executeUpdate();
+			int count = pstmt.executeUpdate();                 // 쿼리문실행 -->성공갯수 리턴
 
-			///// 4.결과처리 /////
-			System.out.println(count + "건 수정 되었습니다");
+			// 4.결과처리
+			System.out.println(count + "건이 등록 되었습니다.");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
-			///// 5. 자원정리 /////
+
+			// 5. 자원정리
 			try {
 				/*
 				if (rs != null) {
-				rs.close();
+				    rs.close();
 				} 
 				*/
 				if (pstmt != null) {
