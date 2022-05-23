@@ -36,7 +36,7 @@ public class BookUpdate {
 					pstmt = conn.prepareStatement(query);
 					pstmt.setString(1, "삼국지");
 					pstmt.setString(2, "민음사");
-					pstmt.setInt(3, 1998-02-22);
+					pstmt.setString(3, "1998-02-22");
 					pstmt.setInt(4, 1);
 
 					// 실행

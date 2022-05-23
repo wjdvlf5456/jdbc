@@ -30,7 +30,7 @@ public class BookSelect {
 			query += "		pubs,";
 			query += "		to_char(pub_date, 'YYYY-MM-DD'),";
 			query += "		author_id";
-			query += "		from book";
+			query += " from book";
 			System.out.println(query);
 
 			// 바인딩

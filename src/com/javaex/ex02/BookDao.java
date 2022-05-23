@@ -226,12 +226,13 @@ public class BookDao {
 			///// 3. SQL문 준비 / 바인딩 / 실행 /////
 			// SQL문 준비
 			String query = "";
-			query += " select book_id,";
-			query += "		title,";
-			query += "		pubs,";
-			query += "		to_char(pub_date, 'YYYY-MM-DD'),";
-			query += "		author_id";
-			query += " from book";
+			query += " select b.book_id,";
+			query += "		b.title,";
+			query += "		b.pubs,";
+			query += "		to_char(b.pub_date, 'YYYY-MM-DD'),";
+			query += "		a.author_name";
+			query += " from author a";
+			query += " left outer join book b on b.author_id = a.author_id";
 
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
@@ -250,9 +251,9 @@ public class BookDao {
 				String pubs = rs.getString(3);
 				String pubDate = rs.getString(4);
 				int authorId = rs.getInt(5);
-				
+
 				BookVo bookVo = new BookVo(bookId, title, pubs, pubDate, authorId);
-				
+
 				bookList.add(bookVo);
 			}
 
