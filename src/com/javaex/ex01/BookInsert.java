@@ -31,8 +31,10 @@ public class BookInsert {
 
 			// 바인딩
 			pstmt = conn.prepareStatement(query);  // 문자열 쿼리로 만들기
-			pstmt.setString(1, "김영하");          // ?(물음표) 중 1번째 -->순서중요
-			pstmt.setString(2, "알쓸신잡");       // ?(물음표) 중 2번째 -->순서중요
+			pstmt.setString(1, "우리들의 일그러진 영웅");          // ?(물음표) 중 1번째 -->순서중요
+			pstmt.setString(2, "다림");       // ?(물음표) 중 2번째 -->순서중요
+			pstmt.setInt(3, 1998 - 02 - 22);       // ?(물음표) 중 3번째 -->순서중요
+			pstmt.setInt(4, 1);       // ?(물음표) 중 4번째 -->순서중요
 
 			// 실행
 			int count = pstmt.executeUpdate();                 // 쿼리문실행 -->성공갯수 리턴

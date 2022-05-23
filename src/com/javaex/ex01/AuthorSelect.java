@@ -27,7 +27,7 @@ public class AuthorSelect {
 			query += " select author_id,";
 			query += "		  author_name,";
 			query += "		  author_desc";
-			query += "		  from author";
+			query += "		  from author	";
 			System.out.println(query);
 
 			// 바인딩

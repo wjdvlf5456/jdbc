@@ -34,9 +34,10 @@ public class BookUpdate {
 
 					// 바인딩
 					pstmt = conn.prepareStatement(query);
-					pstmt.setString(1, "최문열");
-					pstmt.setString(2, "서울특별시");
-					pstmt.setInt(3, 1);
+					pstmt.setString(1, "삼국지");
+					pstmt.setString(2, "민음사");
+					pstmt.setInt(3, 1998-02-22);
+					pstmt.setInt(4, 1);
 
 					// 실행
 					int count = pstmt.executeUpdate();

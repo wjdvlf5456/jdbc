@@ -25,11 +25,8 @@ public class BookSelectAll {
 			///// 3. SQL문 준비 / 바인딩 / 실행 /////
 			// SQL문 준비
 			String query = "";
-			query += " select book_id,";
-			query += "		  title,";
-			query += "		  pubs";
-			query += "		  pub_date";
-			query += "		  from book";
+			query += " select *";
+			query += " from book";
 			System.out.println(query);
 
 			// 바인딩
@@ -37,6 +34,7 @@ public class BookSelectAll {
 
 			// 실행
 			rs = pstmt.executeQuery();
+			System.out.println(rs);
 
 			///// 4.결과처리 /////
 			while (rs.next()) {

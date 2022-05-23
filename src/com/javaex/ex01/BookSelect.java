@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class BookSelect {
 
 	public static void main(String[] args) {
-		
+
 		// 0. import java.sql.*;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -26,10 +26,11 @@ public class BookSelect {
 			// SQL문 준비
 			String query = "";
 			query += " select book_id,";
-			query += "		  title,";
-			query += "		  pubs";
-			query += "		  pub_date";
-			query += "		  from book";
+			query += "		title,";
+			query += "		pubs,";
+			query += "		to_char(pub_date, 'YYYY-MM-DD'),";
+			query += "		author_id";
+			query += "		from book";
 			System.out.println(query);
 
 			// 바인딩
@@ -45,10 +46,12 @@ public class BookSelect {
 				// String bookDesc = rs.getString("book_desc");
 
 				int bookId = rs.getInt(1);
-				String bookName = rs.getString(2);
-				String bookDesc = rs.getString(3);
+				String title = rs.getString(2);
+				String pubs = rs.getString(3);
+				String pubDate = rs.getString(4);
+				int authorId = rs.getInt(5);
 
-				System.out.println(bookId + ", " + bookName + ", " + bookDesc);
+				System.out.println(bookId + ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId);
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -72,7 +75,6 @@ public class BookSelect {
 				System.out.println("error:" + e);
 			}
 		}
-
 
 	}
 
