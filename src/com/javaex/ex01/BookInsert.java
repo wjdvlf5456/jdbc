@@ -25,8 +25,8 @@ public class BookInsert {
 
 			// SQL문 준비
 			String query = "";
-			query += " insert into author ";
-			query += " values(seq_author_id.nextval, ?, ?) ";
+			query += " insert into book ";
+			query += " values(seq_book_id.nextval, ?, ? , ?, ?) ";
 			System.out.println(query);
 
 			// 바인딩
